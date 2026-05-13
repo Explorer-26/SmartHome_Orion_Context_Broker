@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  orion:
+    image: fiware/orion:3.10.1
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    ports:
+      - "1026:1026"
+    command: -dbhost mongodb -logLevel DEBUG
+    restart: on-failure
