@@ -49,10 +49,7 @@ tick = 0
 
 while True:
     tick += 1
-
-    # =================================================
     # SMART PLUG
-    # =================================================
     plug_on = (tick % 45) < 30
 
     update(ENTITIES["plug"], {
@@ -70,9 +67,7 @@ while True:
         }
     })
 
-    # =================================================
     # CAMERA
-    # =================================================
     motion = random.random() < 0.2
     recording = motion or random.random() < 0.1
 
@@ -91,9 +86,7 @@ while True:
         }
     })
 
-    # =================================================
     # SMART TV
-    # =================================================
     if tick % 60 == 0:
         tv_state = "on" if tv_state == "off" else "off"
 
@@ -126,9 +119,7 @@ while True:
         }
     })
 
-    # =================================================
     # SMART METER
-    # =================================================
     hour = datetime.datetime.now().hour
 
     base_kw = random.uniform(1.5, 3.5) if 7 <= hour <= 22 else random.uniform(0.2, 0.8)
@@ -156,9 +147,7 @@ while True:
         }
     })
 
-    # =================================================
     # TEMPERATURE SENSOR
-    # =================================================
     base_temp += random.uniform(-0.05, 0.05)
     base_humidity += random.uniform(-0.3, 0.3)
 
